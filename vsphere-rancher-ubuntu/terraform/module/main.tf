@@ -58,6 +58,12 @@ resource "vsphere_virtual_machine" "vm" {
 
   clone {
     template_uuid = data.vsphere_content_library_item.item.id
+    customize {
+      linux_options {
+        host_name = "${var.corral_user_id}-${random_id.cluster_id.hex}-cp-${count.index}"
+        domain    = ""
+      }
+    }
   }
 
 }
